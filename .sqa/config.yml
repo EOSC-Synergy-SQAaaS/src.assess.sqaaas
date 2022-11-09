@@ -1,0 +1,62 @@
+config:
+  credentials: []
+  project_repos:
+    bitbucket.org/gruiz/hackathon_manager/src:
+      branch: master
+      repo: https://bitbucket.org/gruiz/hackathon_manager/src
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.5
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      bitbucket.org/gruiz/hackathon_manager/src git:
+        commands:
+        - /usr/bin/env sh .sqa/script.hilly-razzmatazz-slug.sh
+        container: qc.acc_surly-smalt-bulldog
+  QC.Doc:
+    repos:
+      bitbucket.org/gruiz/hackathon_manager/src find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.bluesy-silver-uguisu.sh
+        container: qc.doc_flaky-eggplant-spoonbill
+      bitbucket.org/gruiz/hackathon_manager/src git:
+        commands:
+        - /usr/bin/env sh .sqa/script.whiny-sepia-panda.sh
+        container: qc.doc_greasy-russet-discus
+      bitbucket.org/gruiz/hackathon_manager/src markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.crabby-plum-weasel.sh
+        container: qc.doc_snappy-cerise-owl
+  QC.Lic:
+    repos:
+      bitbucket.org/gruiz/hackathon_manager/src licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.ready-champagne-dragonfly.sh
+        container: qc.lic_hilly-olivine-coral
+  QC.Sec:
+    repos:
+      bitbucket.org/gruiz/hackathon_manager/src bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.squeaky-zucchini-chamois.sh
+        container: qc.sec_lousy-khaki-flamingo
+  QC.Sty:
+    repos:
+      bitbucket.org/gruiz/hackathon_manager/src flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.skanky-amaranth-whale.sh
+        container: qc.sty_blurry-turquoise-nightingale
+      bitbucket.org/gruiz/hackathon_manager/src stylelint:
+        commands:
+        - /usr/bin/env sh .sqa/script.surly-turquoise-toad.sh
+        container: qc.sty_lanky-cinnabar-neanderthal
+  QC.Ver:
+    repos:
+      bitbucket.org/gruiz/hackathon_manager/src get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.flimsy-cerulean-tzu.sh
+        container: qc.ver_baggy-puce-russel
+timeout: 1800
